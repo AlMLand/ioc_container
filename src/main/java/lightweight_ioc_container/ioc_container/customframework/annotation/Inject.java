@@ -1,4 +1,4 @@
-package lightweight_ioc_container.ioc_container.annotation;
+package lightweight_ioc_container.ioc_container.customframework.annotation;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
