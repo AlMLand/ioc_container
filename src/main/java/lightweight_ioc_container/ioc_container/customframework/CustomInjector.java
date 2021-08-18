@@ -40,7 +40,6 @@ public class CustomInjector {
 		applicationScope = new HashMap<>();
 	}
 	
-	
 	public static <T> T getService(Class<T> clientClass) {
 		return customInjector.getBeanInstance(clientClass);
 	}
@@ -98,7 +97,9 @@ public class CustomInjector {
 		}
 	}
 	
-	
+	/**
+	 * Hide from public usage
+	 */
 	private void sortClassesByTypes(Collection<Class<?>> types) {
 		for(Class<?> implementedClass : types) {
 			Class<?>[] interfaces = implementedClass.getInterfaces();
@@ -112,7 +113,9 @@ public class CustomInjector {
 		}
 	}
 	
-	
+	/**
+	 * Hide from public usage
+	 */
 	@SuppressWarnings("deprecation")
 	private void sortClassesByAnnotation(Class<?>[] classes) {
 		for(Class<?> eachClass : classes) {
@@ -166,7 +169,7 @@ public class CustomInjector {
 	@SuppressWarnings("deprecation")
 	public <T> Object getBeanInstance(Class<T> interfaceClass, String fieldName, String beanName) {
 		Class<?> implementationClass = getImplementationClass(interfaceClass, fieldName, beanName);
-		if(applicationScope.containsKey(implementationClass)) {
+		if (applicationScope.containsKey(implementationClass)) {
 			return applicationScope.get(implementationClass);
 		}
 		synchronized (applicationScope) {
@@ -189,23 +192,23 @@ public class CustomInjector {
 		Set<Entry<Class<?>, Class<?>>> implementationClasses = clientClassesMap.entrySet().stream()
 				.filter(entry -> entry.getValue() == interfaceClass).collect(Collectors.toSet());
 		String errorMessage = "";
-		if(implementationClasses == null || implementationClasses.size() == 0) {
+		if (implementationClasses == null || implementationClasses.size() == 0) {
 			errorMessage = "No implementation found for interface " + interfaceClass.getName();
 		} else if (implementationClasses.size() == 1) {
 			Optional<Entry<Class<?>, Class<?>>> optional = implementationClasses.stream().findFirst();
-			if(optional.isPresent()) {
+			if (optional.isPresent()) {
 				return optional.get().getKey();
 			}
 		} else if (implementationClasses.size() > 1) {
 			final String findBy = (beanName == null || beanName.trim().length() == 0) ? fieldName : beanName;
 			Optional<Entry<Class<?>, Class<?>>> optional = implementationClasses.stream()
 					.filter(entry -> entry.getKey().getSimpleName().equalsIgnoreCase(findBy)).findAny();
-			if(optional.isPresent()) {
+			if (optional.isPresent()) {
 				return optional.get().getKey();
 			}
 		} else {
-			errorMessage = "There are " + implementationClasses.size() + " of interface " + interfaceClass.getName() +
-					" the conflict must be resolved";
+			errorMessage = "There are " + implementationClasses.size() + " of interface " + interfaceClass.getName()
+					+ " the conflict must be resolved";
 		}
 		throw new RuntimeErrorException(new Error(errorMessage));
 	}
