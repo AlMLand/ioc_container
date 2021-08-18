@@ -18,5 +18,13 @@ public class ComponentClient {
 		String componentBetaServiceName = componentBetaService.getComponentBetaName();
 		System.out.printf("Alpha name: %s\nBeta name: %s", componentAlphaServiceName, componentBetaServiceName);
 	}
-	
+
+	public ComponentAlphaService getComponentAlphaService() {
+		return componentAlphaService;
+	}
+
+	public ComponentBetaService getComponentBetaService() {
+		return componentBetaService;
+	}
+
 }
