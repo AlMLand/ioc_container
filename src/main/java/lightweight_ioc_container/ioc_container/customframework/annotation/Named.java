@@ -1,5 +1,9 @@
 package lightweight_ioc_container.ioc_container.customframework.annotation;
 
+/**
+ * Specifies the object of injection
+ * Apply together with the annotation @Inject
+ */
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
