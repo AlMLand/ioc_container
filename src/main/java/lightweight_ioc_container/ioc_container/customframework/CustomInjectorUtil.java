@@ -10,18 +10,30 @@ import org.burningwave.core.classes.FieldCriteria;
 import lightweight_ioc_container.ioc_container.customframework.annotation.Inject;
 import lightweight_ioc_container.ioc_container.customframework.annotation.Named;
 
+/**
+ * Injecting dependencies declared inside the service classes
+ */
 public class CustomInjectorUtil {
 
+	/**
+	 * Hide from public usage
+	 */
 	private CustomInjectorUtil() {
 		super();
 	}
 
+	/**
+	 * Perform injection recursively, for each service inside the Client class
+	 */
 	public static void inject(CustomInjector customInjector, Class<?> eachClass, Object classInstance) {
 		Collection<Field> fields = Fields.findAllAndMakeThemAccessible(FieldCriteria
 				.forEntireClassHierarchy().allThoseThatMatch(field -> field.isAnnotationPresent(Inject.class)), eachClass);
 		collectionSearchForBeanWithAnnotationNamed(fields, customInjector, classInstance);
 	}
 	
+	/**
+	 * Hide from public usage
+	 */
 	private static void collectionSearchForBeanWithAnnotationNamed(Collection<Field> fields,
 			CustomInjector customInjector, Object classInstance) {
 		for (Field field : fields) {
