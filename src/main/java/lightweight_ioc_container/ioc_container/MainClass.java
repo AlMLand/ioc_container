@@ -10,6 +10,7 @@ public class MainClass {
 		CustomInjector.startApplication(MainClass.class);
 		ComponentClient componentClient = CustomInjector.getService(ComponentClient.class);
 		componentClient.showAllComponentNames();
+		CustomInjector.endApplicationInitCustomInjectorWithNull();
 		
 	}
 
