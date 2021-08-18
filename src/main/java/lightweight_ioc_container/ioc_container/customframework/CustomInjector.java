@@ -21,8 +21,14 @@ import org.burningwave.core.classes.SearchConfig;
 
 import lightweight_ioc_container.ioc_container.customframework.annotation.Bean;
 
+/**
+ * Responsible to create instances of all clients and inject instances for each service in client classes
+ */
 public class CustomInjector {
 
+	/**
+	 * Map all the client classes
+	 */
 	private Map<Class<?>, Class<?>> clientClassesMap;
 	private Map<Class<?>, Object> applicationScope;
 	private static CustomInjector customInjector;
@@ -39,7 +45,10 @@ public class CustomInjector {
 		return customInjector.getBeanInstance(clientClass);
 	}
 	
-
+	/**
+	 * Start application
+	 * @param applicationMainClass
+	 */
 	public static void startApplication(Class<?> applicationMainClass) {
 		lock.lock();
 		try {
@@ -50,7 +59,11 @@ public class CustomInjector {
 		}
 	}
 
-	
+	/**
+	 * Hide from public usage
+	 * @param applicationMainClass
+	 * @return singleton from CustomerInjector
+	 */
 	private static CustomInjector initializationCustomInjector(Class<?> applicationMainClass) {
 		if(customInjector == null) {
 			return new CustomInjector();
@@ -58,12 +71,18 @@ public class CustomInjector {
 		return customInjector;
 	}
 	
-	
+	/**
+	 * Initialization from CustomerInjector with null value
+	 * End application
+	 */
 	public static void endApplicationInitCustomInjectorWithNull() {
 		customInjector = null;
 	}
 	
-	
+	/**
+	 * Initialize the CustomerInjector framework
+	 * Hide from public usage
+	 */
 	private void initializationFramework(Class<?> applicationMainClass) {
 		Class<?>[] classes = getAllClasses(applicationMainClass.getPackageName(), true);
 		ComponentContainer componentContainer = ComponentContainer.getInstance();
@@ -110,7 +129,10 @@ public class CustomInjector {
 		}
 	}
 
-	
+	/**
+	 * Hide from public usage
+	 * Get all the classes for the input package
+	 */
 	private Class<?>[] getAllClasses(String packageName, boolean recursive) {
 		ComponentContainer componentContainer = ComponentContainer.getInstance();
 		ClassHunter classHunter = componentContainer.getClassHunter();
@@ -127,13 +149,20 @@ public class CustomInjector {
 		}
 	}
 	
-	
+	/**
+	 * Create and get the Object instance of the implementation class for input
+	 * interface service
+	 * 
+	 * Hide from public usage
+	 */
 	@SuppressWarnings("unchecked")
 	private <T> T getBeanInstance(Class<T> interfaceClass) {
 		return (T) getBeanInstance(interfaceClass, null, null);
 	}
 
-
+	/**
+	 * Overload getBeanInstance to handle named search and injection by type
+	 */
 	@SuppressWarnings("deprecation")
 	public <T> Object getBeanInstance(Class<T> interfaceClass, String fieldName, String beanName) {
 		Class<?> implementationClass = getImplementationClass(interfaceClass, fieldName, beanName);
@@ -152,7 +181,10 @@ public class CustomInjector {
 		}
 	}
 
-
+	/**
+	 * Get the name of the implementation class for input interface service
+	 * Hide from public usage
+	 */
 	private Class<?> getImplementationClass(Class<?> interfaceClass, final String fieldName, final String beanName) {
 		Set<Entry<Class<?>, Class<?>>> implementationClasses = clientClassesMap.entrySet().stream()
 				.filter(entry -> entry.getValue() == interfaceClass).collect(Collectors.toSet());
