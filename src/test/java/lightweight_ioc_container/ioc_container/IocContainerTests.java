@@ -1,16 +1,11 @@
 package lightweight_ioc_container.ioc_container;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import lightweight_ioc_container.ioc_container.customframework.CustomInjector;
-import lightweight_ioc_container.ioc_container.service.ComponentAlphaService;
-import lightweight_ioc_container.ioc_container.service.ComponentBetaService;
-import lightweight_ioc_container.ioc_container.service.ComponentClient;
+import lightweight_ioc_container.ioc_container.service.*;
 
 public class IocContainerTests {
 	

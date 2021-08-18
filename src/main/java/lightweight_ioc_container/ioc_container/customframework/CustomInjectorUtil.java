@@ -7,8 +7,7 @@ import java.util.Collection;
 
 import org.burningwave.core.classes.FieldCriteria;
 
-import lightweight_ioc_container.ioc_container.customframework.annotation.Inject;
-import lightweight_ioc_container.ioc_container.customframework.annotation.Named;
+import lightweight_ioc_container.ioc_container.customframework.annotation.*;
 
 /**
  * Injecting dependencies declared inside the service classes

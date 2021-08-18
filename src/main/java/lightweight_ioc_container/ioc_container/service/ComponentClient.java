@@ -1,8 +1,6 @@
 package lightweight_ioc_container.ioc_container.service;
 
-import lightweight_ioc_container.ioc_container.customframework.annotation.Bean;
-import lightweight_ioc_container.ioc_container.customframework.annotation.Inject;
-import lightweight_ioc_container.ioc_container.customframework.annotation.Named;
+import lightweight_ioc_container.ioc_container.customframework.annotation.*;
 
 @Bean
 public class ComponentClient {
