@@ -39,7 +39,6 @@ public class CustomInjector {
 		return customInjector.getBeanInstance(clientClass);
 	}
 	
-	
 
 	public static void startApplication(Class<?> applicationMainClass) {
 		lock.lock();
@@ -60,6 +59,11 @@ public class CustomInjector {
 	}
 	
 	
+	public static void endApplicationInitCustomInjectorWithNull() {
+		customInjector = null;
+	}
+	
+	
 	private void initializationFramework(Class<?> applicationMainClass) {
 		Class<?>[] classes = getAllClasses(applicationMainClass.getPackageName(), true);
 		ComponentContainer componentContainer = ComponentContainer.getInstance();
@@ -71,7 +75,7 @@ public class CustomInjector {
 				.by(ClassCriteria.create().allThoseThatMatch(cls -> { return cls.getAnnotation(Bean.class) != null; } )))) {
 			Collection<Class<?>> types = searchResult.getClasses();
 			sortClassesByTypes(types);
-			sortClassesByAnnotaion(classes);
+			sortClassesByAnnotation(classes);
 		}
 	}
 	
@@ -91,7 +95,7 @@ public class CustomInjector {
 	
 	
 	@SuppressWarnings("deprecation")
-	private void sortClassesByAnnotaion(Class<?>[] classes) {
+	private void sortClassesByAnnotation(Class<?>[] classes) {
 		for(Class<?> eachClass : classes) {
 			if(eachClass.isAnnotationPresent(Bean.class)) {
 				Object classInstance = null;
