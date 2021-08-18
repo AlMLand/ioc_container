@@ -1,5 +1,8 @@
 package lightweight_ioc_container.ioc_container.customframework.annotation;
 
+/**
+ * Mark a variable as a target for injection
+ */
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
