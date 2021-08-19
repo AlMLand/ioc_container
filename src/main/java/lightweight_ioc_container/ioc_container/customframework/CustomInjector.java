@@ -26,6 +26,9 @@ public class CustomInjector {
 	private static CustomInjector customInjector;
 	private static final Lock lock = new ReentrantLock(); 
 
+	/**
+	 * Hide from public usage
+	 */
 	private CustomInjector() {
 		super();
 		clientClassesMap = new HashMap<>();
